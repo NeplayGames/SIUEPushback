@@ -37,6 +37,24 @@ namespace SIUE.ControllerGames
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""75903e77-23c7-4782-a164-8d11c96d2073"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Value"",
+                    ""id"": ""d4a13572-00b0-49f4-b764-99b96912ab77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -50,6 +68,28 @@ namespace SIUE.ControllerGames
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e27334f0-bcfe-4b2b-9549-ed611c9401a6"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c37f63dc-731a-4e5e-8124-d83823b912a0"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -59,6 +99,8 @@ namespace SIUE.ControllerGames
             // Gameplay
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
             m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+            m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
+            m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -121,11 +163,15 @@ namespace SIUE.ControllerGames
         private readonly InputActionMap m_Gameplay;
         private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
         private readonly InputAction m_Gameplay_Move;
+        private readonly InputAction m_Gameplay_Rotate;
+        private readonly InputAction m_Gameplay_Shoot;
         public struct GameplayActions
         {
             private @GameActions m_Wrapper;
             public GameplayActions(@GameActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+            public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
+            public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -138,6 +184,12 @@ namespace SIUE.ControllerGames
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -145,6 +197,12 @@ namespace SIUE.ControllerGames
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Rotate.started -= instance.OnRotate;
+                @Rotate.performed -= instance.OnRotate;
+                @Rotate.canceled -= instance.OnRotate;
+                @Shoot.started -= instance.OnShoot;
+                @Shoot.performed -= instance.OnShoot;
+                @Shoot.canceled -= instance.OnShoot;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -165,6 +223,8 @@ namespace SIUE.ControllerGames
         public interface IGameplayActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnRotate(InputAction.CallbackContext context);
+            void OnShoot(InputAction.CallbackContext context);
         }
     }
 }

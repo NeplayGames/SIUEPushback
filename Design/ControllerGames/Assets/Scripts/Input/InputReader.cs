@@ -9,6 +9,8 @@ namespace SIUE.ControllerGames.Input
         private GameActions gameActions;
 
         public event Action<Vector2> moveAction;
+        public event Action<Vector2> rotateAction;
+        public event Action<float> shootAction;
         public InputReader()
         {
             gameActions = new GameActions();
@@ -16,14 +18,19 @@ namespace SIUE.ControllerGames.Input
             gameActions.Gameplay.Enable();
         }
 
-        public void Dispose()
-        {
+        public void Dispose()=>
              gameActions.Gameplay.RemoveCallbacks(this);
-        }
+        
 
-        public void OnMove(InputAction.CallbackContext context)
-        {
+        public void OnMove(InputAction.CallbackContext context)=>    
             moveAction?.Invoke(context.ReadValue<Vector2>());
-        }   
+        
+        public void OnRotate(InputAction.CallbackContext context)=>
+            rotateAction?.Invoke(context.ReadValue<Vector2>());
+
+        public void OnShoot(InputAction.CallbackContext context)
+        {
+            shootAction?.Invoke(context.ReadValue<float>());
+        }
     }   
 }

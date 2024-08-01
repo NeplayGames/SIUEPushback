@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SIUE.ControllerGames.Player;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -11,6 +12,7 @@ namespace SIUE.ControllerGames.DataBase
         [field:SerializeField] public GameObject player { get; private set; }
         void OnValidate(){
             Assert.IsNotNull(player, $"The player is null in {nameof(GameObjectsDB)}");
+            Assert.IsTrue(player.GetComponent<PlayerController>(), "The player needs to have the player Controller");
         }
     }
 }
