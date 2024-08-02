@@ -27,13 +27,7 @@ namespace SIUE.ControllerGames.Player
         private Vector3 targetPosition;
         private float throwTimer;
         private bool isThrowing;
-
-        /// <summary>
-        /// Initiates the throw by setting the start position, target position, and timer.
-        /// </summary>
-        /// <param name="direction">The direction in which to throw the item.</param>
-        /// <param name="distance">The distance the item should travel.</param>
-        public void StartThrow(Vector3 direction, float distance)
+        public void HitPlayer(Vector3 direction, float distance)
         {
             startPosition = transform.position;
             targetPosition = startPosition + direction.normalized * distance;
@@ -50,14 +44,6 @@ namespace SIUE.ControllerGames.Player
         private void Shoot(float obj)
         {
             ThrowItemEvent?.Invoke(direction);
-        }
-
-        void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.TryGetComponent(out ThrowableItems throwableItems))
-            {
-                StartThrow(throwableItems.Direction, 3);
-            }
         }
 
         private void MovePlayer(Vector2 vector)

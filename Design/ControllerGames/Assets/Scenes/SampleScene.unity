@@ -242,8 +242,8 @@ GameObject:
   - component: {fileID: 143877315}
   - component: {fileID: 143877314}
   m_Layer: 0
-  m_Name: Walls
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 3
   m_MaxPlayerCount: -1
   m_AllowJoining: 1
   m_JoinBehavior: 0
@@ -1031,8 +1031,8 @@ GameObject:
   - component: {fileID: 1378699461}
   - component: {fileID: 1378699460}
   m_Layer: 0
-  m_Name: Walls
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,8 +1345,8 @@ GameObject:
   - component: {fileID: 1619504382}
   - component: {fileID: 1619504381}
   m_Layer: 0
-  m_Name: Walls
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1514,8 +1514,8 @@ GameObject:
   - component: {fileID: 1989381866}
   - component: {fileID: 1989381865}
   m_Layer: 0
-  m_Name: Walls
-  m_TagString: Untagged
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
