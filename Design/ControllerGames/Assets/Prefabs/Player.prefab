@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 4395469535723768609}
   isControllable: 1
+  throwPower: 10
+  throwDuration: 1
 --- !u!54 &3820719030585502404
 Rigidbody:
   m_ObjectHideFlags: 0

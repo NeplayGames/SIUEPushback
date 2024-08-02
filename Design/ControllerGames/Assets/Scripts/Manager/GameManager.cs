@@ -3,6 +3,7 @@ using SIUE.ControllerGames.DataBase;
 using SIUE.ControllerGames.Input;
 using SIUE.ControllerGames.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SIUE.ControllerGames.System{
 
@@ -10,20 +11,24 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObjectsDB gameObjectsDB;
     [SerializeField] private PlayerInstantiatePosition playerInstantiatePosition;
-    private InputReader inputReader;
+    [SerializeField] private PlayerInputManager playerInputManager;
     private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
-        inputReader = new InputReader();
+        playerInputManager.onPlayerJoined += OnPlayerJoined;
         //Temp
-        InstantiatePlayer();
     }
 
-        private void InstantiatePlayer()
+        private void OnPlayerJoined(PlayerInput input)
+        {
+            InstantiatePlayer(input);
+        }
+
+        private void InstantiatePlayer(PlayerInput input)
         {
             playerController = Instantiate(gameObjectsDB.player,playerInstantiatePosition.playerPosition[0].position, Quaternion.identity ).GetComponent<PlayerController>();
-            playerController.SetInputReader(inputReader);   
+            playerController.SetInputReader(new InputReader(input));   
         }
 
         // Update is called once per frame
