@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class ThrowableConfig : MonoBehaviour
+namespace SIUE.ControllerGames.Throwables
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(fileName = "Throwable Item Config", menuName = "Config/Throwable Item Config")]
+    public class ThrowableConfig : ScriptableObject
     {
-        
-    }
+        [field: SerializeField] public EThrowablesRarity eThrowablesRarity { get; private set; }
+        [field: SerializeField] public GameObject throwable { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        void OnValidate()
+        {
+            Assert.IsNotNull(throwable, $"{nameof(throwable)} is null in {nameof(ThrowableConfig)}");
+        }
+    }    
 }

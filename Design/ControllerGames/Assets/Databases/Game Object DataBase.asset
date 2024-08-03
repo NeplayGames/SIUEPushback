@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Game Object DataBase
   m_EditorClassIdentifier: 
   <player>k__BackingField: {fileID: 4443730356237671479, guid: 971dcad921d807a43ae61e903ae483e4, type: 3}
-  <throwable>k__BackingField: {fileID: 6941152297612261077, guid: 0d35bb19cc024be4695112535fca8837, type: 3}
+  <throwableDB>k__BackingField: {fileID: 11400000, guid: 3a529da782fbe4d40a1c7636b51353b6, type: 2}
