@@ -18,8 +18,24 @@ namespace SIUE.ControllerGames.Input
             rotateInputAction = playerInput.actions["Rotate"];
             shootInputAction = playerInput.actions["Shoot"];
             moveInputAction.performed += OnMove;
+            moveInputAction.canceled += OnMoveCancel;
+            rotateInputAction.canceled += OnRotateCancel;
             rotateInputAction.performed += OnRotate;
+            shootInputAction.canceled += OnShootCancel;
             shootInputAction.performed += OnShoot;
+        }
+
+        private void OnRotateCancel(InputAction.CallbackContext context)
+        {
+        }
+
+        private void OnShootCancel(InputAction.CallbackContext context)
+        {
+        }
+
+        private void OnMoveCancel(InputAction.CallbackContext context)
+        {
+           moveAction?.Invoke(Vector2.zero);
         }
 
         public void Dispose()
@@ -27,6 +43,9 @@ namespace SIUE.ControllerGames.Input
             moveInputAction.performed -= OnMove;
             rotateInputAction.performed -= OnRotate;
             shootInputAction.performed -= OnShoot;
+              moveInputAction.canceled -= OnMoveCancel;
+            rotateInputAction.canceled -= OnRotateCancel;
+            shootInputAction.canceled -= OnShootCancel;
         }
 
         public void OnMove(InputAction.CallbackContext context) =>

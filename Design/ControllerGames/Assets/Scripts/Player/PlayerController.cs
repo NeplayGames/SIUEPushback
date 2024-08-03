@@ -18,7 +18,6 @@ namespace SIUE.ControllerGames.Player
         private InputReader inputReader;
 
         private Vector3 direction;
-        public event Action<Vector3> ThrowItemEvent;
         //Temp
         private int rotationSpeed = 720;
         public float throwPower = 10f; // The power of the throw
@@ -26,13 +25,27 @@ namespace SIUE.ControllerGames.Player
         private Vector3 startPosition;
         private Vector3 targetPosition;
         private float throwTimer;
+        private ThrowableItems pickedThrowableItem;
         private bool isThrowing;
-        public void HitPlayer(Vector3 direction, float distance)
+        public void GotHit(Vector3 direction, float distance)
         {
             startPosition = transform.position;
             targetPosition = startPosition + direction.normalized * distance;
             throwTimer = 0f;
             isThrowing = true;
+        }
+
+        private void OnTriggerEnter(Collider collision)
+        {
+            if(collision.gameObject.TryGetComponent(out ThrowableItems throwableItems))
+            {
+                if(throwableItems.shoot){
+                    GotHit(throwableItems.Direction, throwableItems.distance);
+                }
+                if(pickedThrowableItem != null) return;
+                this.pickedThrowableItem = throwableItems;
+                throwableItems.GotPicked(this.transform);
+            }
         }
         public void SetInputReader(InputReader inputReader)
         {
@@ -43,7 +56,9 @@ namespace SIUE.ControllerGames.Player
 
         private void Shoot(float obj)
         {
-            ThrowItemEvent?.Invoke(direction);
+            if(pickedThrowableItem == null) return;
+            pickedThrowableItem.OnThrow(direction, transform.position);
+            pickedThrowableItem = null;
         }
 
         private void MovePlayer(Vector2 vector)
