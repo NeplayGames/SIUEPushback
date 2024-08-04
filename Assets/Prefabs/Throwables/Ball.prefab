@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 768415359302645263}
   - component: {fileID: 8272165993532619057}
   - component: {fileID: 7035359934954604084}
-  - component: {fileID: -7520740595595351048}
+  - component: {fileID: 6580040256363929898}
   m_Layer: 3
   m_Name: Ball
   m_TagString: Throwable
@@ -149,8 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemRigidBody: {fileID: 8272165993532619057}
-  trailRenderer: {fileID: -7520740595595351048}
---- !u!96 &-7520740595595351048
+  trailRenderer: {fileID: 6580040256363929898}
+  particleSystem1: {fileID: 8862214673490395375}
+  particleSystem2: {fileID: 8861992792179138127}
+--- !u!96 &6580040256363929898
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -322,6 +324,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199475210524781420, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199761440681089244, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -330,5 +340,15 @@ PrefabInstance:
 --- !u!4 &8659719321278619687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4571727128055394, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
+  m_PrefabInstance: {fileID: 8664289208704986693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8861992792179138127 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198618377285316618, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
+  m_PrefabInstance: {fileID: 8664289208704986693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8862214673490395375 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198532680956653226, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
   m_PrefabInstance: {fileID: 8664289208704986693}
   m_PrefabAsset: {fileID: 0}

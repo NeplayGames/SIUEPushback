@@ -9,12 +9,13 @@ namespace SIUE.ControllerGames.DataBase
     [CreateAssetMenu(fileName = "Game Object DataBase", menuName = "DB/GameObjectDB")]
     public class GameObjectsDB : ScriptableObject
     {
-        [field:SerializeField] public GameObject player { get; private set; }
-        [field:SerializeField] public ThrowableDB throwableDB { get; private set; }
-        void OnValidate(){
-            Assert.IsNotNull(player, $"The player is null in {nameof(GameObjectsDB)}");
+        [field: SerializeField] public List<GameObject> players { get; private set; }
+        [field: SerializeField] public ThrowableDB throwableDB { get; private set; }
+        void OnValidate()
+        {
             Assert.IsNotNull(throwableDB, $"The {nameof(throwableDB)} is null in {nameof(GameObjectsDB)}");
-            Assert.IsTrue(player.GetComponent<PlayerController>(), "The player needs to have the player Controller");
+            foreach (var player in players)
+                Assert.IsTrue(player.GetComponent<PlayerController>(), "The player needs to have the player Controller");
         }
     }
 }

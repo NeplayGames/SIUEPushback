@@ -1,25 +1,34 @@
+using System;
 using SIUE.ControllerGames.DataBase;
+using SIUE.ControllerGames.PoolSystem;
 using UnityEngine;
 
 namespace SIUE.ControllerGames.Throwables
 {
-    public class ThrowableManager
+    public class ThrowableManager : IDisposable
     {
         private ThrowableDB throwableDB;
         private Transform flyingObjectTransform;
-        public ThrowableManager(ThrowableDB throwableDB, Transform flyingObjectTransform)
+        private IPool<ThrowableItems> throwableItemsPool {get;}
+        private int totalCount = 0;
+        public ThrowableManager(ThrowableDB throwableDB, Transform flyingObjectTransform, PoolFabric poolFabric)
         {
             this.throwableDB = throwableDB;
             this.flyingObjectTransform = flyingObjectTransform;
+            ThrowableItems.OnReturn += () => totalCount--;
+            this.throwableItemsPool = poolFabric.CreatePool(throwableDB.throwable);
         }
+
+      
+        
 
         public void InstantiateThrowable()
         {
-            GameObject spawnedThrowableItem = GameObject.Instantiate(this.throwableDB.throwable,
-            flyingObjectTransform.position,
-            Quaternion.identity);
-            ThrowableItems throwableItems = spawnedThrowableItem.GetComponent<ThrowableItems>();
+            if(totalCount >= 5) return;
+            totalCount++;
+            ThrowableItems throwableItems = throwableItemsPool.Request();
             EThrowablesRarity rarity = GetEThrowablesRarity();
+            throwableItems.ResetItem(flyingObjectTransform.position,throwableItemsPool, GetColor(rarity));
             throwableItems.SetDistanceAndTime(GetDistance(rarity), GetSpeed(rarity));
         }
 
@@ -39,11 +48,23 @@ namespace SIUE.ControllerGames.Throwables
         {
             return eThrowablesRarity switch
             {
-                EThrowablesRarity.Common => 50,
-                EThrowablesRarity.Rare => 60,
-                EThrowablesRarity.Epic => 70,
-                EThrowablesRarity.Legendary => 80,
+                EThrowablesRarity.Common => throwableDB.commonItemSpeed,
+                EThrowablesRarity.Rare => throwableDB.rareItemSpeed,
+                EThrowablesRarity.Epic => throwableDB.epicItemSpeed,
+                EThrowablesRarity.Legendary => throwableDB.legendaryItemSpeed,
                 _ => 0,
+            };
+        }
+
+         private Color GetColor(EThrowablesRarity eThrowablesRarity)
+        {
+            return eThrowablesRarity switch
+            {
+                EThrowablesRarity.Common => throwableDB.commonColor,
+                EThrowablesRarity.Rare => throwableDB.rareColor,
+                EThrowablesRarity.Epic => throwableDB.epicColor,
+                EThrowablesRarity.Legendary => throwableDB.legendaryColor,
+                _ => Color.white,
             };
         }
 
@@ -51,12 +72,17 @@ namespace SIUE.ControllerGames.Throwables
         {
             return eThrowablesRarity switch
             {
-                EThrowablesRarity.Common => 4,
-                EThrowablesRarity.Rare => 6,
-                EThrowablesRarity.Epic => 8,
-                EThrowablesRarity.Legendary => 10,
+                EThrowablesRarity.Common => throwableDB.commonDistancePushed,
+                EThrowablesRarity.Rare => throwableDB.rareDistancePushed,
+                EThrowablesRarity.Epic => throwableDB.epicDistancePushed,
+                EThrowablesRarity.Legendary => throwableDB.legendaryDistancePushed,
                 _ => 0,
             };
+        }
+
+        public void Dispose()
+        {
+            ThrowableItems.OnReturn -= () => totalCount--;
         }
     }
 }

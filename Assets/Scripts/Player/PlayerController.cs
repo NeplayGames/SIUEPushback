@@ -41,6 +41,7 @@ namespace SIUE.ControllerGames.Player
             {
                 if(throwableItems.shoot){
                     GotHit(throwableItems.Direction, throwableItems.distance);
+                    throwableItems.Remove();
                 }
                 if(pickedThrowableItem != null) return;
                 this.pickedThrowableItem = throwableItems;
