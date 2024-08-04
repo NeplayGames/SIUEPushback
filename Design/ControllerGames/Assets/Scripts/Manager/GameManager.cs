@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using SIUE.ControllerGames.DataBase;
 using SIUE.ControllerGames.Input;
 using SIUE.ControllerGames.Player;
@@ -25,16 +23,12 @@ namespace SIUE.ControllerGames.System
             //Temp
         }
 
-        private void InstantiateThrowable()
-        {
+        private void InstantiateThrowable() =>
             throwableManager.InstantiateThrowable();
-        }
 
-        private void OnPlayerJoined(PlayerInput input)
-        {
-            print("Player is spawned");
+
+        private void OnPlayerJoined(PlayerInput input) =>
             InstantiatePlayer(input);
-        }
 
         private void InstantiatePlayer(PlayerInput input)
         {
@@ -43,11 +37,6 @@ namespace SIUE.ControllerGames.System
                 Quaternion.identity)
                 .GetComponent<PlayerController>().
                 SetInputReader(new InputReader(input));
-        }
-
-        void OnDestroy()
-        {
-            PlayerInputManager.instance.onPlayerJoined -= OnPlayerJoined;
         }
     }
 }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SIUE.ControllerGames.DataBase;
-using TMPro;
 using UnityEngine;
 
 namespace SIUE.ControllerGames.Throwables
@@ -11,28 +7,37 @@ namespace SIUE.ControllerGames.Throwables
     {
         private ThrowableDB throwableDB;
         private Transform flyingObjectTransform;
-        private int length;
         public ThrowableManager(ThrowableDB throwableDB, Transform flyingObjectTransform)
         {
             this.throwableDB = throwableDB;
             this.flyingObjectTransform = flyingObjectTransform;
-            length = this.throwableDB.throwableConfigs.Count;
         }
 
         public void InstantiateThrowable()
         {
-            int index = UnityEngine.Random.Range(0, length);
-            ThrowableConfig throwableItemsConfig = this.throwableDB.throwableConfigs[index];
-            GameObject spawnedThrowableItem = GameObject.Instantiate(throwableItemsConfig.throwable,
+            GameObject spawnedThrowableItem = GameObject.Instantiate(this.throwableDB.throwable,
             flyingObjectTransform.position,
             Quaternion.identity);
             ThrowableItems throwableItems = spawnedThrowableItem.GetComponent<ThrowableItems>();
-            throwableItems.SetDistanceAndTime(GetDistance(throwableItemsConfig.eThrowablesRarity), GetSpeed(throwableItemsConfig.eThrowablesRarity));
+            EThrowablesRarity rarity = GetEThrowablesRarity();
+            throwableItems.SetDistanceAndTime(GetDistance(rarity), GetSpeed(rarity));
+        }
+
+        public EThrowablesRarity GetEThrowablesRarity()
+        {
+            float rarityFloatRandom = UnityEngine.Random.Range(0f, 1f);
+            if (rarityFloatRandom < 0.5f)
+                return EThrowablesRarity.Common;
+            if (rarityFloatRandom < .75f)
+                return EThrowablesRarity.Rare;
+            if (rarityFloatRandom < .90f)
+                return EThrowablesRarity.Legendary;
+            return EThrowablesRarity.Epic;
         }
 
         private float GetSpeed(EThrowablesRarity eThrowablesRarity)
         {
-             return eThrowablesRarity switch 
+            return eThrowablesRarity switch
             {
                 EThrowablesRarity.Common => 50,
                 EThrowablesRarity.Rare => 60,
@@ -44,7 +49,7 @@ namespace SIUE.ControllerGames.Throwables
 
         private float GetDistance(EThrowablesRarity eThrowablesRarity)
         {
-            return eThrowablesRarity switch 
+            return eThrowablesRarity switch
             {
                 EThrowablesRarity.Common => 4,
                 EThrowablesRarity.Rare => 6,

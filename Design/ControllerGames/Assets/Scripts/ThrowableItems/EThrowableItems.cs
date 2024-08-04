@@ -1,8 +1,4 @@
 namespace SIUE.ControllerGames.Throwables{
-    public enum EThrowables{
-        
-    }
-
     public enum EThrowablesRarity
     {
         Common = 0,

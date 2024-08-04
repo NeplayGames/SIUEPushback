@@ -24,13 +24,13 @@ namespace SIUE.ControllerGames.Throwables
             currentPosition = transform.position;
             newPosition = GetRandomPositionInsideArena();
             float distance = Vector3.Distance(currentPosition, newPosition);
-            time = distance/2;
+            time = distance / 8;
             tempTime = 0;
         }
 
         private Vector3 GetRandomPositionInsideArena()
         {
-            return new Vector3(Random.Range(-fieldWidth, fieldWidth), 
+            return new Vector3(Random.Range(-fieldWidth, fieldWidth),
                 height,
                 Random.Range(-fieldWidth, fieldWidth));
         }

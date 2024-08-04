@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd0dfbdbeb5aad4c970b9a2ebb64bde, type: 3}
   m_Name: Throwable DB
   m_EditorClassIdentifier: 
-  <throwableConfigs>k__BackingField:
-  - {fileID: 11400000, guid: 713c0254ec23c0d4aad04f5f495cabea, type: 2}
-  - {fileID: 11400000, guid: 27dee7e29c8a1234d88f44d1dbf45916, type: 2}
-  - {fileID: 11400000, guid: ece1dd717dae7aa44ab528d38c768d6e, type: 2}
-  - {fileID: 11400000, guid: c02ec61af72063e4694dea951cb8a371, type: 2}
-  - {fileID: 11400000, guid: 246501e41cfc1934dab04d8e5fa5ad66, type: 2}
+  <throwable>k__BackingField: {fileID: 6941152297612261077, guid: 0d35bb19cc024be4695112535fca8837, type: 3}
+  <commonColor>k__BackingField: {r: 0.65882355, g: 0.6509804, b: 0.65882355, a: 0}
+  <rareColor>k__BackingField: {r: 0.078431375, g: 0.54509807, b: 0.015686275, a: 0}
+  <epicColor>k__BackingField: {r: 0.41960788, g: 0.18823531, b: 0.9058824, a: 0}
+  <legendaryColor>k__BackingField: {r: 0.86666673, g: 0.6, b: 0.007843138, a: 0}

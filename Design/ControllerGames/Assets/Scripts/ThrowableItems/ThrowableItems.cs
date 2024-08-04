@@ -1,15 +1,17 @@
 using System;
 using SIUE.ControllerGames.Player;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace SIUE.ControllerGames.Throwables
 {
     public class ThrowableItems : MonoBehaviour
     {
         [SerializeField] private Rigidbody itemRigidBody;
+        [SerializeField] private  TrailRenderer trailRenderer;
         public bool shoot { get; private set; } = false;
         private bool collectItem = false;
-        public float distance{ get; private set; }
+        public float distance { get; private set; }
         public Vector3 Direction { get; private set; }
         private float speed;
 
@@ -32,6 +34,7 @@ namespace SIUE.ControllerGames.Throwables
         public void OnThrow(Vector3 direction, Vector3 position)
         {
             collectItem = true;
+            trailRenderer.enabled = true;
             this.transform.position = position;
             this.Direction = direction;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -40,19 +43,25 @@ namespace SIUE.ControllerGames.Throwables
             shoot = true;
         }
 
-        internal void SetDistanceAndTime(float distance, float speed)
+        public void SetDistanceAndTime(float distance, float speed)
         {
             this.distance = distance;
             this.speed = speed;
         }
 
-        internal void GotPicked(Transform parent)
+        public void GotPicked(Transform parent)
         {
-            if(collectItem) return;
+            if (collectItem) return;
             collectItem = true;
             transform.SetParent(parent);
             transform.localPosition = Vector3.up;
             itemRigidBody.isKinematic = true;
+        }
+
+        void OnValidate()
+        {
+            Assert.IsNotNull(itemRigidBody);
+            Assert.IsNotNull(trailRenderer);
         }
     }
 }
