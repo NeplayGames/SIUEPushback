@@ -61,7 +61,7 @@ namespace SIUE.ControllerGames
                 {
                     ""name"": """",
                     ""id"": ""73741a9d-fd09-4309-b5d9-2ba987b1f8c5"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

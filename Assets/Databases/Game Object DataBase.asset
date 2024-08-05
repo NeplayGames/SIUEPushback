@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 4443730356237671479, guid: c2e1c3a90fdde3e46aaa53705c72c4d2, type: 3}
   - {fileID: 4443730356237671479, guid: f179b9f9793266840a0c78ca1cc3e88c, type: 3}
   <throwableDB>k__BackingField: {fileID: 11400000, guid: 3a529da782fbe4d40a1c7636b51353b6, type: 2}
+  <configsDB>k__BackingField: {fileID: 11400000, guid: fd639d29c1867844185c75406c329608, type: 2}

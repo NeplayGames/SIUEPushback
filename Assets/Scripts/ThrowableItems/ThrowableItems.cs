@@ -1,8 +1,5 @@
 using System;
-using SIUE.ControllerGames.Player;
 using SIUE.ControllerGames.PoolSystem;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Assertions;
 using static UnityEngine.ParticleSystem;
@@ -11,7 +8,6 @@ namespace SIUE.ControllerGames.Throwables
 {
     public class ThrowableItems : MonoBehaviour
     {
-        [SerializeField] private Rigidbody itemRigidBody;
         [SerializeField] private TrailRenderer trailRenderer;
         [SerializeField] private ParticleSystem particleSystem1;
         [SerializeField] private ParticleSystem particleSystem2;
@@ -22,7 +18,7 @@ namespace SIUE.ControllerGames.Throwables
         private float speed;
         public static event Action OnReturn;
         private IPool<ThrowableItems> throwableItemsPool { set; get; }
-        void OnTriggerEnter(Collider collision)
+        void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Wall"))
                 Remove();
@@ -64,11 +60,7 @@ namespace SIUE.ControllerGames.Throwables
             collectItem = true;
             transform.SetParent(parent);
             transform.localPosition = Vector3.up;
-            IsKinematic(true);
         }
-
-        private void IsKinematic(bool isKinematic) =>
-            itemRigidBody.isKinematic = isKinematic;
 
         public void ResetItem(Vector3 position, IPool<ThrowableItems> throwableItemPool, Color rarityColor)
         {
@@ -79,7 +71,6 @@ namespace SIUE.ControllerGames.Throwables
             mainModule2.startColor = rarityColor;
             this.transform.position = position;
             this.throwableItemsPool = throwableItemPool;
-            IsKinematic(false);
             trailRenderer.enabled = false;
             collectItem = false;
             shoot = false;
@@ -104,7 +95,6 @@ namespace SIUE.ControllerGames.Throwables
         }
         void OnValidate()
         {
-            Assert.IsNotNull(itemRigidBody);
             Assert.IsNotNull(trailRenderer);
         }
     }

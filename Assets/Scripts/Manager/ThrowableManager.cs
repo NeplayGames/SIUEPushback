@@ -28,7 +28,8 @@ namespace SIUE.ControllerGames.Throwables
             totalCount++;
             ThrowableItems throwableItems = throwableItemsPool.Request();
             EThrowablesRarity rarity = GetEThrowablesRarity();
-            throwableItems.ResetItem(flyingObjectTransform.position,throwableItemsPool, GetColor(rarity));
+            Vector3 throwableItemPosition = new Vector3(flyingObjectTransform.position.x, 3.4f, flyingObjectTransform.position.z);
+            throwableItems.ResetItem(throwableItemPosition,throwableItemsPool, GetColor(rarity));
             throwableItems.SetDistanceAndTime(GetDistance(rarity), GetSpeed(rarity));
         }
 

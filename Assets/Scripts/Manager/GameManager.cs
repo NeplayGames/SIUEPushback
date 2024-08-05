@@ -15,16 +15,17 @@ namespace SIUE.ControllerGames.System
         [SerializeField] private PlayerInstantiatePosition playerInstantiatePosition;
         [SerializeField] private Transform flyingObjectTransform;
         private ThrowableManager throwableManager;
+        private ConfigsDB configsDB;
         private PoolFabric poolFabric;
         private int playerInstantiate;
         // Start is called before the first frame update
         void Start()
         {
             poolFabric = new PoolFabric();
+            configsDB = gameObjectsDB.configsDB;
             throwableManager = new ThrowableManager(gameObjectsDB.throwableDB, flyingObjectTransform,this.poolFabric);
             PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
-            InvokeRepeating(nameof(InstantiateThrowable), 1f, 1);
-            //Temp
+            InvokeRepeating(nameof(InstantiateThrowable), 1f, 5);
         }
 
         private void InstantiateThrowable() =>
@@ -36,12 +37,12 @@ namespace SIUE.ControllerGames.System
 
         private void InstantiatePlayer(PlayerInput input)
         {
-            if(playerInstantiate == 4) return;
+            if(playerInstantiate == configsDB.playerConfig.totalPlayer) return;
             Instantiate(gameObjectsDB.players[playerInstantiate],
                 playerInstantiatePosition.playerPosition[playerInstantiate].position,
                 Quaternion.identity)
                 .GetComponent<PlayerController>().
-                SetInputReader(new InputReader(input));
+                SetInputReader(new InputReader(input), configsDB.playerConfig);
             playerInstantiate++;
         }
     }

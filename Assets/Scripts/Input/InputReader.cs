@@ -35,7 +35,7 @@ namespace SIUE.ControllerGames.Input
 
         private void OnMoveCancel(InputAction.CallbackContext context)
         {
-           moveAction?.Invoke(Vector2.zero);
+           moveAction?.Invoke(context.ReadValue<Vector2>());
         }
 
         public void Dispose()

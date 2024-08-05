@@ -17,11 +17,11 @@ MonoBehaviour:
   <rareColor>k__BackingField: {r: 0.078431375, g: 0.54509807, b: 0.015686275, a: 0}
   <epicColor>k__BackingField: {r: 0.41960788, g: 0.18823531, b: 0.9058824, a: 0}
   <legendaryColor>k__BackingField: {r: 0.86666673, g: 0.6, b: 0.007843138, a: 0}
-  <commonDistancePushed>k__BackingField: 8
-  <rareDistancePushed>k__BackingField: 12
-  <epicDistancePushed>k__BackingField: 16
+  <commonDistancePushed>k__BackingField: 16
+  <rareDistancePushed>k__BackingField: 18
+  <epicDistancePushed>k__BackingField: 20
   <legendaryDistancePushed>k__BackingField: 20
-  <commonItemSpeed>k__BackingField: 50
-  <rareItemSpeed>k__BackingField: 70
+  <commonItemSpeed>k__BackingField: 70
+  <rareItemSpeed>k__BackingField: 80
   <epicItemSpeed>k__BackingField: 90
   <legendaryItemSpeed>k__BackingField: 100

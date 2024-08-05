@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2212420904538911242}
   - component: {fileID: 6675098457044889241}
   - component: {fileID: 768415359302645263}
-  - component: {fileID: 8272165993532619057}
   - component: {fileID: 7035359934954604084}
   - component: {fileID: 6580040256363929898}
   m_Layer: 3
@@ -32,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 11.06, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8659719321278619687}
   m_Father: {fileID: 0}
@@ -109,33 +108,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8272165993532619057
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941152297612261077}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!114 &7035359934954604084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385ee13f30b45324f9dc110e61886002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemRigidBody: {fileID: 8272165993532619057}
   trailRenderer: {fileID: 6580040256363929898}
   particleSystem1: {fileID: 8862214673490395375}
   particleSystem2: {fileID: 8861992792179138127}
