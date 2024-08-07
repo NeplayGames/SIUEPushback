@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Throwable DB
   m_EditorClassIdentifier: 
   <throwable>k__BackingField: {fileID: 7035359934954604084, guid: 0d35bb19cc024be4695112535fca8837, type: 3}
-  <commonColor>k__BackingField: {r: 0.65882355, g: 0.6509804, b: 0.65882355, a: 0}
-  <rareColor>k__BackingField: {r: 0.078431375, g: 0.54509807, b: 0.015686275, a: 0}
-  <epicColor>k__BackingField: {r: 0.41960788, g: 0.18823531, b: 0.9058824, a: 0}
-  <legendaryColor>k__BackingField: {r: 0.86666673, g: 0.6, b: 0.007843138, a: 0}
-  <commonDistancePushed>k__BackingField: 16
-  <rareDistancePushed>k__BackingField: 18
-  <epicDistancePushed>k__BackingField: 20
-  <legendaryDistancePushed>k__BackingField: 20
-  <commonItemSpeed>k__BackingField: 70
-  <rareItemSpeed>k__BackingField: 80
-  <epicItemSpeed>k__BackingField: 90
-  <legendaryItemSpeed>k__BackingField: 100
+  <commonColor>k__BackingField: {r: 0.65882355, g: 0.6509804, b: 0.65882355, a: 1}
+  <rareColor>k__BackingField: {r: 0.078431375, g: 0.54509807, b: 0.015686275, a: 1}
+  <epicColor>k__BackingField: {r: 0.41960788, g: 0.18823531, b: 0.9058824, a: 1}
+  <legendaryColor>k__BackingField: {r: 0.86666673, g: 0.6, b: 0.007843138, a: 1}
+  <commonDistancePushed>k__BackingField: 30
+  <rareDistancePushed>k__BackingField: 30
+  <epicDistancePushed>k__BackingField: 30
+  <legendaryDistancePushed>k__BackingField: 30
+  <commonItemSpeed>k__BackingField: 113.2
+  <rareItemSpeed>k__BackingField: 114.4
+  <epicItemSpeed>k__BackingField: 115.6
+  <legendaryItemSpeed>k__BackingField: 121.5

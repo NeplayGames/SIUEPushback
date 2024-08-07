@@ -64,9 +64,11 @@ namespace SIUE.ControllerGames.Throwables
 
         public void ResetItem(Vector3 position, IPool<ThrowableItems> throwableItemPool, Color rarityColor)
         {
-            trailRenderer.colorGradient = CreateGradient(rarityColor);
+            Gradient gradient = CreateGradient(rarityColor);
+            trailRenderer.colorGradient = gradient;
             MainModule mainModule1 = particleSystem1.main;
             mainModule1.startColor = rarityColor;
+           // mainModule1.colo
             MainModule mainModule2 = particleSystem2.main;
             mainModule2.startColor = rarityColor;
             this.transform.position = position;
@@ -82,13 +84,13 @@ namespace SIUE.ControllerGames.Throwables
 
             // Blend color from red at 0% to blue at 100%
             var colors = new GradientColorKey[2];
-            colors[0] = new GradientColorKey(color, 0.0f);
+            colors[0] = new GradientColorKey(color, 1.0f);
             colors[1] = new GradientColorKey(color, 1.0f);
 
             // Blend alpha from opaque at 0% to transparent at 100%
             var alphas = new GradientAlphaKey[2];
-            alphas[0] = new GradientAlphaKey(1.0f, 0.0f);
-            alphas[1] = new GradientAlphaKey(0.0f, 1.0f);
+            alphas[0] = new GradientAlphaKey(1.0f, 1.0f);
+            alphas[1] = new GradientAlphaKey(1.0f, 1.0f);
 
             gradient.SetKeys(colors, alphas);
             return gradient;

@@ -15,6 +15,7 @@ namespace SIUE.ControllerGames.Player
     {
         [SerializeField] private CharacterController characterController;
         [SerializeField] public bool isControllable;
+        public EPlayer ePlayer {get; set;}
         private Vector3 playerMovement;
         private InputReader inputReader;
         private PlayerConfig playerConfig;
@@ -51,12 +52,13 @@ namespace SIUE.ControllerGames.Player
                 throwableItems.GotPicked(this.transform);
             }
         }
-        public void SetInputReader(InputReader inputReader, PlayerConfig playerConfig)
+        public void SetInputReader(InputReader inputReader, PlayerConfig playerConfig , EPlayer ePlayer)
         {
             this.playerConfig = playerConfig;
             this.inputReader = inputReader;
             this.inputReader.moveAction += MovePlayer;
             this.inputReader.shootAction += Shoot;
+            this.ePlayer = ePlayer;
         }
 
         public bool IsHit

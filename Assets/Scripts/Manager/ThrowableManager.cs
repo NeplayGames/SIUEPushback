@@ -19,9 +19,6 @@ namespace SIUE.ControllerGames.Throwables
             this.throwableItemsPool = poolFabric.CreatePool(throwableDB.throwable);
         }
 
-      
-        
-
         public void InstantiateThrowable()
         {
             if(totalCount >= 5) return;

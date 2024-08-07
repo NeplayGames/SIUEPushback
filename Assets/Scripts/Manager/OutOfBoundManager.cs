@@ -14,26 +14,25 @@ namespace SIUE.ControllerGames
         void Start() =>
          RegisterMethods();
 
+        public event Action<EPlayer> PlayerLostGame;
         private void RegisterMethods()
         {
             foreach (OutOfBoundTriggerInstances instance in ofBoundTriggerInstances)
             {
-                instance.OnPlayerOutOfBound += OnPlayerOutOfBound;
+                instance.OnPlayerOutOfBoundEvent += OnPlayerOutOfBound;
             }
         }
 
-        private void OnPlayerOutOfBound(PlayerController controller)
+        private void OnPlayerOutOfBound(EPlayer ePlayer)
         {
-            if(controller.IsHit)
-                controller.isControllable = false;
-            print($"{nameof(controller)} lost the match");
+            PlayerLostGame?.Invoke(ePlayer);
         }
 
         void OnDestroy()
         {
             foreach (OutOfBoundTriggerInstances instance in ofBoundTriggerInstances)
             {
-                instance.OnPlayerOutOfBound -= OnPlayerOutOfBound;
+                instance.OnPlayerOutOfBoundEvent -= OnPlayerOutOfBound;
             }
         }
     }
