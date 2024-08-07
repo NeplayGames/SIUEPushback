@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SIUE.ControllerGames.Configs;
 using SIUE.ControllerGames.DataBase;
 using SIUE.ControllerGames.Input;
 using SIUE.ControllerGames.Player;
@@ -19,21 +20,22 @@ namespace SIUE.ControllerGames.System
         [SerializeField] private PlayerInstantiatePosition playerInstantiatePosition;
         [SerializeField] private UIManager uIManager;
         [SerializeField] private OutOfBoundManager outOfBoundManager;
-        [SerializeField] private Transform flyingObjectTransform;
         private List<PlayerController> playerControllers = new List<PlayerController>();
         private ThrowableManager throwableManager;
-        private ConfigsDB configsDB;
         private PoolFabric poolFabric;
+        private ConfigManager configManager;
         private int playerInstantiate;
         // Start is called before the first frame update
         void Start()
         {
             poolFabric = new PoolFabric();
-            configsDB = gameObjectsDB.configsDB;
-            throwableManager = new ThrowableManager(gameObjectsDB.throwableDB, flyingObjectTransform, this.poolFabric);
+            configManager = new ConfigManager(gameObjectsDB.configsDB);
+            throwableManager = new ThrowableManager(configManager, gameObjectsDB.throwableDB.throwable,
+            this.poolFabric);
             PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
             uIManager.StartGameAction += StartGame;
             outOfBoundManager.PlayerLostGame += OnPlayerLostGame;
+
         }
 
         private void OnPlayerLostGame(EPlayer player)
@@ -66,13 +68,13 @@ namespace SIUE.ControllerGames.System
 
         private void InstantiatePlayer(PlayerInput input)
         {
-            if (playerInstantiate == configsDB.playerConfig.totalPlayer) return;
+            if (playerInstantiate == configManager.playerConfig.totalPlayer) return;
             PlayerController playerController = Instantiate(gameObjectsDB.players[playerInstantiate],
                 playerInstantiatePosition.playerPosition[playerInstantiate].position,
                 Quaternion.identity)
                 .GetComponent<PlayerController>();
             playerControllers.Add(playerController);
-            playerController.SetInputReader(new InputReader(input), configsDB.playerConfig, GetEPlayer(playerInstantiate));
+            playerController.SetInputReader(new InputReader(input), configManager.playerConfig, GetEPlayer(playerInstantiate));
             playerInstantiate++;
             uIManager.TotalPlayer(playerInstantiate);
         }
@@ -97,13 +99,13 @@ namespace SIUE.ControllerGames.System
             }
             PlayerInputManager.instance.DisableJoining();
             uIManager.StartGameAction -= StartGame;
-            SceneManager.LoadSceneAsync("EnvironmentDesign", LoadSceneMode.Additive);
-            InvokeRepeating(nameof(InstantiateThrowable), 1f, 1);
+           // SceneManager.LoadSceneAsync("EnvironmentDesign", LoadSceneMode.Additive);
+            InvokeRepeating(nameof(InstantiateThrowable), 1f, configManager.throwableItemConfig.throwableRate);
+
         }
 
         void OnDestroy()
         {
-            PlayerInputManager.instance.onPlayerJoined -= OnPlayerJoined;
             outOfBoundManager.PlayerLostGame -= OnPlayerLostGame;
         }
     }

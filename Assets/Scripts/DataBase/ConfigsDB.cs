@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SIUE.ControllerGames.Configs;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace SIUE.ControllerGames.DataBase
 {
@@ -10,6 +11,14 @@ namespace SIUE.ControllerGames.DataBase
     {
         [field: Header("Player Config")]
         [field: SerializeField] public PlayerConfig playerConfig { get; private set; }
+        [field: SerializeField] public ThrowableItemConfig throwableItemConfig { get; private set; }
+        [field: SerializeField] public float surfaceHeight { get; private set; }
+
+        void OnValidate()
+        {
+            Assert.IsNotNull(playerConfig);
+            Assert.IsNotNull(throwableItemConfig);
+        }
     }
 
 }

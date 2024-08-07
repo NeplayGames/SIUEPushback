@@ -66,11 +66,15 @@ namespace SIUE.ControllerGames.Throwables
         {
             Gradient gradient = CreateGradient(rarityColor);
             trailRenderer.colorGradient = gradient;
-            MainModule mainModule1 = particleSystem1.main;
-            mainModule1.startColor = rarityColor;
-           // mainModule1.colo
+            ColorOverLifetimeModule colorOverLifetimeModule = particleSystem1.colorOverLifetime;
+            colorOverLifetimeModule.color = new MinMaxGradient(gradient);
+            MainModule mainModule = particleSystem1.main;
+            mainModule.startColor = rarityColor;
             MainModule mainModule2 = particleSystem2.main;
             mainModule2.startColor = rarityColor;
+           // mainModule1.colo
+             ColorOverLifetimeModule colorOverLifetimeModule2 = particleSystem2.colorOverLifetime;
+            colorOverLifetimeModule2.color = new MinMaxGradient(gradient);
             this.transform.position = position;
             this.throwableItemsPool = throwableItemPool;
             trailRenderer.enabled = false;

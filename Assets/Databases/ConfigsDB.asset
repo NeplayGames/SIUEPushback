@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ConfigsDB
   m_EditorClassIdentifier: 
   <playerConfig>k__BackingField: {fileID: 11400000, guid: 2602a73755266ee4a818ad4f69894900, type: 2}
+  <throwableItemConfig>k__BackingField: {fileID: 11400000, guid: a343594f53bbce94daabd147f215fc1d, type: 2}
+  <surfaceHeight>k__BackingField: 3.4

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357413d1e531e7c438ae8d65dfb959ad, type: 3}
+  m_Name: Throwable Item Config
+  m_EditorClassIdentifier: 
+  <commonColor>k__BackingField: {r: 0.76470596, g: 0.76470596, b: 0.76470596, a: 1}
+  <rareColor>k__BackingField: {r: 0.09411766, g: 0.5058824, b: 0.07058824, a: 1}
+  <epicColor>k__BackingField: {r: 0, g: 0.49411768, b: 0.81568635, a: 1}
+  <legendaryColor>k__BackingField: {r: 0.41960788, g: 0.1764706, b: 0.9058824, a: 1}
+  <commonDistancePushed>k__BackingField: 16
+  <rareDistancePushed>k__BackingField: 20
+  <epicDistancePushed>k__BackingField: 24
+  <legendaryDistancePushed>k__BackingField: 30
+  <commonItemSpeed>k__BackingField: 100
+  <rareItemSpeed>k__BackingField: 120
+  <epicItemSpeed>k__BackingField: 140
+  <legendaryItemSpeed>k__BackingField: 150
+  <throwableRate>k__BackingField: 1
+  <totalThrowableItems>k__BackingField: 10
+  <ArenaLength>k__BackingField: 30
