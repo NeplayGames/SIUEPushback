@@ -19,10 +19,6 @@ namespace SIUE.ControllerGames.Player
         private Vector3 playerMovement;
         private InputReader inputReader;
         private PlayerConfig playerConfig;
-        private Vector3 direction;
-        //Temp
-        private int rotationSpeed = 10;
-        public float throwPower = 10f; // The power of the throw
         public float throwDuration = 1f; // Duration of the throw in seconds
         private Vector3 startPosition;
         private Vector3 targetPosition;
@@ -41,7 +37,7 @@ namespace SIUE.ControllerGames.Player
         {
             if (collision.gameObject.TryGetComponent(out ThrowableItems throwableItems))
             {
-                if (throwableItems.shoot)
+                if (throwableItems.shoot && ePlayer != throwableItems.shootingPlayer)
                 {
                     GotHit(throwableItems.Direction, throwableItems.distance);
                     throwableItems.Remove();
@@ -72,7 +68,7 @@ namespace SIUE.ControllerGames.Player
         private void Shoot(float obj)
         {
             if (pickedThrowableItem == null) return;
-            pickedThrowableItem.OnThrow(direction, transform.position + transform.forward * 3);
+            pickedThrowableItem.OnThrow(transform.forward, transform.position, ePlayer);
             pickedThrowableItem = null;
         }
 
@@ -116,12 +112,11 @@ namespace SIUE.ControllerGames.Player
         {
             print(playerMovement.magnitude);
             if(playerMovement.magnitude < .2f) return;
-            direction = playerMovement.normalized;      
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Quaternion targetRotation = Quaternion.LookRotation(playerMovement.normalized);
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation,
                 targetRotation,
-                rotationSpeed
+                playerConfig.playerRotationSpeed
             );
             this.characterController.Move(playerMovement * Time.deltaTime *  playerConfig.playerSpeed);
         }

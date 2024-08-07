@@ -9,7 +9,6 @@ using SIUE.ControllerGames.Throwables;
 using SIUE.ControllerGames.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace SIUE.ControllerGames.System
 {
@@ -25,6 +24,11 @@ namespace SIUE.ControllerGames.System
         private PoolFabric poolFabric;
         private ConfigManager configManager;
         private int playerInstantiate;
+
+        private const string player1Name = "Player 1";
+        private const string player2Name = "Player 2";
+        private const string player3Name = "Player 3";
+        private const string player4Name = "Player 4";
         // Start is called before the first frame update
         void Start()
         {
@@ -52,16 +56,29 @@ namespace SIUE.ControllerGames.System
                 }
             }
             if (lostPlayer == null) return;
-            uIManager.GameInfoMessage(player.ToString());
+            uIManager.GameInfoMessage($"{GetPlayerName(player)} is out of arena");
             lostPlayer.isControllable = false;
             playerControllers.Remove(lostPlayer);
             if (playerControllers.Count == 1)
-                uIManager.EndGame($"{playerControllers[0].ePlayer} won the game");
+            {
+                uIManager.EndGame($"{GetPlayerName( playerControllers[0].ePlayer)} won the game");
+                
+            }
+        }
+
+        private object GetPlayerName(EPlayer ePlayer)
+        {
+            return ePlayer switch{
+                EPlayer.EPlayer1 => player1Name,
+                EPlayer.EPlayer2 => player2Name,
+                EPlayer.EPlayer3 => player3Name,
+                EPlayer.EPlayer4 => player4Name,
+                _ => ""
+            };
         }
 
         private void InstantiateThrowable() =>
             throwableManager.InstantiateThrowable();
-
 
         private void OnPlayerJoined(PlayerInput input) =>
             InstantiatePlayer(input);
@@ -69,9 +86,10 @@ namespace SIUE.ControllerGames.System
         private void InstantiatePlayer(PlayerInput input)
         {
             if (playerInstantiate == configManager.playerConfig.totalPlayer) return;
+            Transform playerPositionTransfrom = playerInstantiatePosition.playerPosition[playerInstantiate];
             PlayerController playerController = Instantiate(gameObjectsDB.players[playerInstantiate],
-                playerInstantiatePosition.playerPosition[playerInstantiate].position,
-                Quaternion.identity)
+                playerPositionTransfrom.position,
+                playerPositionTransfrom.rotation)
                 .GetComponent<PlayerController>();
             playerControllers.Add(playerController);
             playerController.SetInputReader(new InputReader(input), configManager.playerConfig, GetEPlayer(playerInstantiate));

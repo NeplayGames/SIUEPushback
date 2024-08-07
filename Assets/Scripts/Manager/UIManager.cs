@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SIUE.ControllerGames.Player;
 using SIUE.ControllerGames.UIP;
 using TMPro;
 using Unity.VisualScripting;
@@ -12,15 +11,19 @@ namespace SIUE.ControllerGames.UI
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI totalPlayerText;
         [SerializeField] private TextMeshProUGUI PlayerLostMessageText;
         [SerializeField] private GameObject UI;
+        [SerializeField] private GameObject InGameUI;
+        [SerializeField] private GameObject RestartUI;
+        [SerializeField] private GameObject startImage;
+        [SerializeField] private GameObject moveImage;
+        [SerializeField] private List<GameObject> playerInfo = new List<GameObject>();
+
         private UIInputReader uIInputReader;
         private int totalPlayer;
         public event Action StartGameAction;
 
-        const string startText = "Press triangle to start";
-        
+
         void Start()
         {
             uIInputReader = new UIInputReader();
@@ -29,30 +32,40 @@ namespace SIUE.ControllerGames.UI
 
         private void StartGame()
         {
-            print(totalPlayer);
             if (totalPlayer > 1)
             {
                 uIInputReader.SelectPressed -= StartGame;
                 StartGameAction?.Invoke();
                 this.UI.SetActive(false);
+                InGameUI.SetActive(true);
             }
         }
 
         public void TotalPlayer(int totalPlayer)
         {
+            playerInfo[this.totalPlayer].SetActive(true);
             this.totalPlayer = totalPlayer;
-            totalPlayerText.text = $"Press X to join. \n The total number of player connected is {totalPlayer}.";
+            moveImage.SetActive(true);
+            if (totalPlayer > 1)
+                startImage.SetActive(true);
         }
 
         public void GameInfoMessage(string message)
         {
             PlayerLostMessageText.text = message;
+            StartCoroutine(StopShowingMessage());
         }
 
+        IEnumerator StopShowingMessage()
+        {
+            yield return new WaitForSeconds(8);
+            PlayerLostMessageText.text = string.Empty;
+        }
         public void EndGame(string message)
         {
-            UI.SetActive(true);
-            totalPlayerText.text = $"{message}\n Press triangle to restart";
+            GameInfoMessage(message);
+            RestartUI.SetActive(true);
+            InGameUI.SetActive(false);
             uIInputReader.SelectPressed += RestartGame;
         }
 

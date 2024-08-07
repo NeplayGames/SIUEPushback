@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player Config
   m_EditorClassIdentifier: 
   <playerSpeed>k__BackingField: 30
-  <playerRotationSpeed>k__BackingField: 10
+  <playerRotationSpeed>k__BackingField: 360
   <totalPlayer>k__BackingField: 4

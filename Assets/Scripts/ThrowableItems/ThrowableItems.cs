@@ -1,4 +1,5 @@
 using System;
+using SIUE.ControllerGames.Player;
 using SIUE.ControllerGames.PoolSystem;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -12,6 +13,7 @@ namespace SIUE.ControllerGames.Throwables
         [SerializeField] private ParticleSystem particleSystem1;
         [SerializeField] private ParticleSystem particleSystem2;
         public bool shoot { get; private set; } = false;
+        public EPlayer shootingPlayer{ get; private set; }
         private bool collectItem = false;
         public float distance { get; private set; }
         public Vector3 Direction { get; private set; }
@@ -36,9 +38,10 @@ namespace SIUE.ControllerGames.Throwables
             if (shoot)
                 transform.position += transform.forward * speed * Time.deltaTime;
         }
-        public void OnThrow(Vector3 direction, Vector3 position)
+        public void OnThrow(Vector3 direction, Vector3 position, EPlayer ePlayer)
         {
             collectItem = true;
+            this.shootingPlayer = ePlayer;
             trailRenderer.enabled = true;
             this.transform.position = position;
             this.Direction = direction;
