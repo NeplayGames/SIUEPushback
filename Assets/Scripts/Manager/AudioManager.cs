@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using SIUE.ControllerGames.DataBase;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace SIUE.ControllerGames.Audio
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AudioManager
     {
-        
+        private AudioDB audioDB { get; }
+
+        public AudioManager(AudioDB audioDB)
+        {
+            this.audioDB = audioDB;
+            this.audioDB.Initialized();
+        }
+
+        public void PlayOneShot(AudioSource audioSource, EAudio eAudio)
+        {
+            EachAudio eachAudio = audioDB.GetAudio(eAudio);
+            audioSource.clip = eachAudio.AudioClip;
+            audioSource.loop = eachAudio.LoopAudio;
+            audioSource.pitch = Random.Range(eachAudio.MinPitch, eachAudio.MaxPitch);
+            audioSource.PlayOneShot(audioSource.clip);
+        }
+       
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

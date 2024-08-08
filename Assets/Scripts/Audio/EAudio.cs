@@ -2,7 +2,7 @@ namespace SIUE.ControllerGames.Audio
 {
     public enum EAudio
     {
-        ESFX = 0,
-        EMusic = 1,
+        EShoot = 0,
+        EHit = 1,
     }
 }

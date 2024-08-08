@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 4443730356237671479, guid: f179b9f9793266840a0c78ca1cc3e88c, type: 3}
   <throwableDB>k__BackingField: {fileID: 11400000, guid: 3a529da782fbe4d40a1c7636b51353b6, type: 2}
   <configsDB>k__BackingField: {fileID: 11400000, guid: fd639d29c1867844185c75406c329608, type: 2}
+  <audiosDB>k__BackingField: {fileID: 11400000, guid: 913fe551e2b43584fa2c15e6b55d4acd, type: 2}

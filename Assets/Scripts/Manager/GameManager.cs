@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SIUE.ControllerGames.Audio;
 using SIUE.ControllerGames.Configs;
 using SIUE.ControllerGames.DataBase;
 using SIUE.ControllerGames.Input;
@@ -10,7 +11,7 @@ using SIUE.ControllerGames.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace SIUE.ControllerGames.System
+namespace SIUE.ControllerGames
 {
 
     public class GameManager : MonoBehaviour
@@ -21,6 +22,7 @@ namespace SIUE.ControllerGames.System
         [SerializeField] private OutOfBoundManager outOfBoundManager;
         private List<PlayerController> playerControllers = new List<PlayerController>();
         private ThrowableManager throwableManager;
+        private AudioManager audioManager;
         private PoolFabric poolFabric;
         private ConfigManager configManager;
         private int playerInstantiate;
@@ -34,6 +36,7 @@ namespace SIUE.ControllerGames.System
         {
             poolFabric = new PoolFabric();
             configManager = new ConfigManager(gameObjectsDB.configsDB);
+            audioManager = new AudioManager(gameObjectsDB.audiosDB);
             throwableManager = new ThrowableManager(configManager, gameObjectsDB.throwableDB.throwable,
             this.poolFabric);
             PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
@@ -92,7 +95,8 @@ namespace SIUE.ControllerGames.System
                 playerPositionTransfrom.rotation)
                 .GetComponent<PlayerController>();
             playerControllers.Add(playerController);
-            playerController.SetInputReader(new InputReader(input), configManager.playerConfig, GetEPlayer(playerInstantiate));
+            playerController.SetInputReader(new InputReader(input), configManager.playerConfig, 
+            GetEPlayer(playerInstantiate), audioManager);
             playerInstantiate++;
             uIManager.TotalPlayer(playerInstantiate);
         }

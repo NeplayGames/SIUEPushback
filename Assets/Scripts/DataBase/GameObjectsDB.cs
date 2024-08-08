@@ -12,10 +12,12 @@ namespace SIUE.ControllerGames.DataBase
         [field: SerializeField] public List<GameObject> players { get; private set; }
         [field: SerializeField] public ThrowableDB throwableDB { get; private set; }
         [field: SerializeField] public ConfigsDB configsDB { get; private set; }
+        [field: SerializeField] public AudioDB audiosDB { get; private set; }
         void OnValidate()
         {
             Assert.IsNotNull(throwableDB, $"The {nameof(throwableDB)} is null in {nameof(GameObjectsDB)}");
             Assert.IsNotNull(configsDB, $"The {nameof(configsDB)} is null in {nameof(GameObjectsDB)}");
+            Assert.IsNotNull(audiosDB, $"The {nameof(audiosDB)} is null in {nameof(GameObjectsDB)}");
             foreach (var player in players)
                 Assert.IsTrue(player.GetComponent<PlayerController>(), "The player needs to have the player Controller");
         }

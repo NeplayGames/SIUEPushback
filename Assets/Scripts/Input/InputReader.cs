@@ -12,6 +12,7 @@ namespace SIUE.ControllerGames.Input
         public event Action<Vector2> moveAction;
         public event Action<Vector2> rotateAction;
         public event Action<float> shootAction;
+        public Gamepad gamepad{get;}
         public InputReader(PlayerInput playerInput)
         {
             moveInputAction = playerInput.actions["Move"];
@@ -23,6 +24,8 @@ namespace SIUE.ControllerGames.Input
             rotateInputAction.performed += OnRotate;
             shootInputAction.canceled += OnShootCancel;
             shootInputAction.performed += OnShoot;
+            if(playerInput.devices[0] is Gamepad)
+                gamepad = (Gamepad)playerInput.devices[0];
         }
 
         private void OnRotateCancel(InputAction.CallbackContext context)

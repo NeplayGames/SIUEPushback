@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SIUE.ControllerGames.Audio;
 using SIUE.ControllerGames.Configs;
 using SIUE.ControllerGames.Input;
 using SIUE.ControllerGames.Throwables;
@@ -14,8 +15,10 @@ namespace SIUE.ControllerGames.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private CharacterController characterController;
+        [SerializeField] private AudioSource audioSource;
         [SerializeField] public bool isControllable;
-        public EPlayer ePlayer {get; set;}
+        public EPlayer ePlayer;
+        private AudioManager audioManager;
         private Vector3 playerMovement;
         private InputReader inputReader;
         private PlayerConfig playerConfig;
@@ -27,6 +30,9 @@ namespace SIUE.ControllerGames.Player
         private bool isPushedBack;
         public void GotHit(Vector3 direction, float distance)
         {
+            audioManager.PlayOneShot(audioSource, EAudio.EHit);
+            print(inputReader.gamepad);
+            inputReader.gamepad?.SetMotorSpeeds(0.123f, 1f);
             startPosition = transform.position;
             targetPosition = startPosition + direction.normalized * distance;
             throwTimer = 0f;
@@ -48,10 +54,11 @@ namespace SIUE.ControllerGames.Player
                 throwableItems.GotPicked(this.transform);
             }
         }
-        public void SetInputReader(InputReader inputReader, PlayerConfig playerConfig , EPlayer ePlayer)
+        public void SetInputReader(InputReader inputReader, PlayerConfig playerConfig , EPlayer ePlayer, AudioManager audioManager)
         {
             this.playerConfig = playerConfig;
             this.inputReader = inputReader;
+            this.audioManager = audioManager;
             this.inputReader.moveAction += MovePlayer;
             this.inputReader.shootAction += Shoot;
             this.ePlayer = ePlayer;
@@ -68,6 +75,7 @@ namespace SIUE.ControllerGames.Player
         private void Shoot(float obj)
         {
             if (pickedThrowableItem == null) return;
+            audioManager.PlayOneShot(this.audioSource, EAudio.EShoot);
             pickedThrowableItem.OnThrow(transform.forward, transform.position, ePlayer);
             pickedThrowableItem = null;
         }
@@ -123,6 +131,7 @@ namespace SIUE.ControllerGames.Player
         void OnValidate()
         {
             Assert.IsNotNull(this.characterController, "The player component Required Character Controller");
+            Assert.IsNotNull(this.audioSource, "The player component Required Audio Source");
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace SIUE.ControllerGames.UIP
+namespace SIUE.ControllerGames.Input
 {
     public class UIInputReader : GameActions.IUIActions, IDisposable
     {

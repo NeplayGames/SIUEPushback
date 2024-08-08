@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SIUE.ControllerGames.UIP;
+using SIUE.ControllerGames.Input;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
