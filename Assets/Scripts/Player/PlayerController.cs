@@ -31,14 +31,18 @@ namespace SIUE.ControllerGames.Player
         public void GotHit(Vector3 direction, float distance)
         {
             audioManager.PlayOneShot(audioSource, EAudio.EHit);
-            print(inputReader.gamepad);
-            inputReader.gamepad?.SetMotorSpeeds(0.123f, 1f);
+            inputReader.gamepad?.SetMotorSpeeds(0.123f, .23f);
+            StartCoroutine(StopVibration());
             startPosition = transform.position;
             targetPosition = startPosition + direction.normalized * distance;
             throwTimer = 0f;
             isPushedBack = true;
         }
 
+        IEnumerator StopVibration(){
+            yield return new WaitForSeconds(1f);
+            inputReader.gamepad?.SetMotorSpeeds(0,0);
+        }
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.TryGetComponent(out ThrowableItems throwableItems))
