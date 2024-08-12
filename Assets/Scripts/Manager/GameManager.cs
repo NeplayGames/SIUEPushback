@@ -42,7 +42,6 @@ namespace SIUE.ControllerGames
             PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
             uIManager.StartGameAction += StartGame;
             outOfBoundManager.PlayerLostGame += OnPlayerLostGame;
-            InvokeRepeating(nameof(InstantiateThrowable), 1f, configManager.throwableItemConfig.throwableRate);
         }
 
         private void OnPlayerLostGame(EPlayer player)
