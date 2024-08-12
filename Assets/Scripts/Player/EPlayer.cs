@@ -8,6 +8,7 @@ namespace SIUE.ControllerGames.Player
        EPlayer2 = 1,
        EPlayer3 = 2,
        EPlayer4 = 3,
+       none = 4,
     }
 
 }

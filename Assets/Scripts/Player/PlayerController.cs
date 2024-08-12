@@ -39,15 +39,18 @@ namespace SIUE.ControllerGames.Player
             isPushedBack = true;
         }
 
-        IEnumerator StopVibration(){
+        IEnumerator StopVibration()
+        {
             yield return new WaitForSeconds(1f);
-            inputReader.gamepad?.SetMotorSpeeds(0,0);
+            inputReader.gamepad?.SetMotorSpeeds(0, 0);
         }
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.TryGetComponent(out ThrowableItems throwableItems))
             {
-                if (throwableItems.shoot && ePlayer != throwableItems.shootingPlayer)
+                if (ePlayer == throwableItems.shootingPlayer)
+                    return;
+                if (throwableItems.shoot)
                 {
                     GotHit(throwableItems.Direction, throwableItems.distance);
                     throwableItems.Remove();
@@ -58,7 +61,7 @@ namespace SIUE.ControllerGames.Player
                 throwableItems.GotPicked(this.transform);
             }
         }
-        public void SetInputReader(InputReader inputReader, PlayerConfig playerConfig , EPlayer ePlayer, AudioManager audioManager)
+        public void SetInputReader(InputReader inputReader, PlayerConfig playerConfig, EPlayer ePlayer, AudioManager audioManager)
         {
             this.playerConfig = playerConfig;
             this.inputReader = inputReader;
@@ -123,14 +126,14 @@ namespace SIUE.ControllerGames.Player
         private void RotateAndMovePlayer()
         {
             print(playerMovement.magnitude);
-            if(playerMovement.magnitude < .2f) return;
+            if (playerMovement.magnitude < .2f) return;
             Quaternion targetRotation = Quaternion.LookRotation(playerMovement.normalized);
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation,
                 targetRotation,
                 playerConfig.playerRotationSpeed
             );
-            this.characterController.Move(playerMovement * Time.deltaTime *  playerConfig.playerSpeed);
+            this.characterController.Move(playerMovement * Time.deltaTime * playerConfig.playerSpeed);
         }
         void OnValidate()
         {

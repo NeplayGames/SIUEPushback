@@ -13,7 +13,7 @@ namespace SIUE.ControllerGames.Throwables
         [SerializeField] private ParticleSystem particleSystem1;
         [SerializeField] private ParticleSystem particleSystem2;
         public bool shoot { get; private set; } = false;
-        public EPlayer shootingPlayer{ get; private set; }
+        public EPlayer shootingPlayer { get; private set; }
         private bool collectItem = false;
         public float distance { get; private set; }
         public Vector3 Direction { get; private set; }
@@ -42,12 +42,13 @@ namespace SIUE.ControllerGames.Throwables
         {
             collectItem = true;
             this.shootingPlayer = ePlayer;
-            trailRenderer.enabled = true;
             this.transform.position = position;
             this.Direction = direction;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = targetRotation;
             transform.SetParent(null);
+            trailRenderer.enabled = true;
+            trailRenderer.Clear();
             shoot = true;
         }
 
@@ -75,12 +76,13 @@ namespace SIUE.ControllerGames.Throwables
             mainModule.startColor = rarityColor;
             MainModule mainModule2 = particleSystem2.main;
             mainModule2.startColor = rarityColor;
-           // mainModule1.colo
-             ColorOverLifetimeModule colorOverLifetimeModule2 = particleSystem2.colorOverLifetime;
+            // mainModule1.colo
+            ColorOverLifetimeModule colorOverLifetimeModule2 = particleSystem2.colorOverLifetime;
             colorOverLifetimeModule2.color = new MinMaxGradient(gradient);
             this.transform.position = position;
             this.throwableItemsPool = throwableItemPool;
             trailRenderer.enabled = false;
+            shootingPlayer = EPlayer.none;
             collectItem = false;
             shoot = false;
         }
