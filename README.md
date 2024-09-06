@@ -9,6 +9,5 @@
 - **Arena Combat**: Fight in a dynamic arena where positioning and timing are key to victory.
 
 ## 🚀 How to Play:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/siue-push-back.git
+1. Clone the repository
+
