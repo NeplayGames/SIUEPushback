@@ -12,6 +12,7 @@ namespace SIUE.ControllerGames.UI
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI PlayerLostMessageText;
+        [SerializeField] private TextMeshProUGUI PlayerWonMessageText;
         [SerializeField] private GameObject UI;
         [SerializeField] private GameObject InGameUI;
         [SerializeField] private GameObject RestartUI;
@@ -63,7 +64,7 @@ namespace SIUE.ControllerGames.UI
         }
         public void EndGame(string message)
         {
-            GameInfoMessage(message);
+             PlayerWonMessageText.text = message;
             RestartUI.SetActive(true);
             InGameUI.SetActive(false);
             uIInputReader.SelectPressed += RestartGame;

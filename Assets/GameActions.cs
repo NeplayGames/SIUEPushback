@@ -180,6 +180,15 @@ namespace SIUE.ControllerGames
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Value"",
+                    ""id"": ""32add6ae-e633-4dcd-a93b-69defe7a595d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -226,6 +235,17 @@ namespace SIUE.ControllerGames
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd315a01-7712-40d0-ad7b-87786125755d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -264,6 +284,7 @@ namespace SIUE.ControllerGames
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
             m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
+            m_UI_Quit = m_UI.FindAction("Quit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -389,12 +410,14 @@ namespace SIUE.ControllerGames
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
         private readonly InputAction m_UI_Select;
         private readonly InputAction m_UI_Click;
+        private readonly InputAction m_UI_Quit;
         public struct UIActions
         {
             private @GameActions m_Wrapper;
             public UIActions(@GameActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Select => m_Wrapper.m_UI_Select;
             public InputAction @Click => m_Wrapper.m_UI_Click;
+            public InputAction @Quit => m_Wrapper.m_UI_Quit;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -410,6 +433,9 @@ namespace SIUE.ControllerGames
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
 
             private void UnregisterCallbacks(IUIActions instance)
@@ -420,6 +446,9 @@ namespace SIUE.ControllerGames
                 @Click.started -= instance.OnClick;
                 @Click.performed -= instance.OnClick;
                 @Click.canceled -= instance.OnClick;
+                @Quit.started -= instance.OnQuit;
+                @Quit.performed -= instance.OnQuit;
+                @Quit.canceled -= instance.OnQuit;
             }
 
             public void RemoveCallbacks(IUIActions instance)
@@ -465,6 +494,7 @@ namespace SIUE.ControllerGames
         {
             void OnSelect(InputAction.CallbackContext context);
             void OnClick(InputAction.CallbackContext context);
+            void OnQuit(InputAction.CallbackContext context);
         }
     }
 }

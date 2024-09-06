@@ -33,6 +33,11 @@ namespace SIUE.ControllerGames.Input
         {
             Debug.Log("Click");
         }
+
+        public void OnQuit(InputAction.CallbackContext context)
+        {
+            Application.Quit();
+        }
     }
 
 }

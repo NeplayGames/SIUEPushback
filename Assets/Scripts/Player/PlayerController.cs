@@ -125,7 +125,6 @@ namespace SIUE.ControllerGames.Player
 
         private void RotateAndMovePlayer()
         {
-            print(playerMovement.magnitude);
             if (playerMovement.magnitude < .2f) return;
             Quaternion targetRotation = Quaternion.LookRotation(playerMovement.normalized);
             transform.rotation = Quaternion.RotateTowards(

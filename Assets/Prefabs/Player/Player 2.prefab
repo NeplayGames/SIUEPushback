@@ -239,6 +239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime_01_King
       objectReference: {fileID: 0}
+    - target: {fileID: 1875645275194409195, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8955322500898459853, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
       propertyPath: m_LocalScale.x
       value: 2

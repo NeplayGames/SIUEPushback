@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8b655482031f443b9323c8cb034ec7, type: 3}
   m_Name: Game Object DataBase
   m_EditorClassIdentifier: 
-  <players>k__BackingField:
-  - {fileID: 4443730356237671479, guid: 971dcad921d807a43ae61e903ae483e4, type: 3}
-  - {fileID: 4443730356237671479, guid: 52afee9b1df9d714185d1b10f360be42, type: 3}
-  - {fileID: 4443730356237671479, guid: c2e1c3a90fdde3e46aaa53705c72c4d2, type: 3}
-  - {fileID: 4443730356237671479, guid: f179b9f9793266840a0c78ca1cc3e88c, type: 3}
+  <BlackPlayer>k__BackingField: {fileID: 4443730356237671479, guid: 971dcad921d807a43ae61e903ae483e4, type: 3}
+  <RedPlayer>k__BackingField: {fileID: 4443730356237671479, guid: 52afee9b1df9d714185d1b10f360be42, type: 3}
+  <PinkPlayer>k__BackingField: {fileID: 4443730356237671479, guid: f179b9f9793266840a0c78ca1cc3e88c, type: 3}
+  <WhitePlayer>k__BackingField: {fileID: 4443730356237671479, guid: c2e1c3a90fdde3e46aaa53705c72c4d2, type: 3}
   <throwableDB>k__BackingField: {fileID: 11400000, guid: 3a529da782fbe4d40a1c7636b51353b6, type: 2}
   <configsDB>k__BackingField: {fileID: 11400000, guid: fd639d29c1867844185c75406c329608, type: 2}
   <audiosDB>k__BackingField: {fileID: 11400000, guid: 913fe551e2b43584fa2c15e6b55d4acd, type: 2}
