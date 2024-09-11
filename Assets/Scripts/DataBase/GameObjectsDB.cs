@@ -9,10 +9,11 @@ namespace SIUE.ControllerGames.DataBase
     [CreateAssetMenu(fileName = "Game Object DataBase", menuName = "DB/GameObjectDB")]
     public class GameObjectsDB : ScriptableObject
     {
-        [field: SerializeField] public GameObject BlackPlayer { get; private set; }
-        [field: SerializeField] public GameObject RedPlayer { get; private set; }
-        [field: SerializeField] public GameObject PinkPlayer { get; private set; }
-        [field: SerializeField] public GameObject WhitePlayer { get; private set; }
+        // [field: SerializeField] public GameObject BlackPlayer { get; private set; }
+        // [field: SerializeField] public GameObject RedPlayer { get; private set; }
+        // [field: SerializeField] public GameObject PinkPlayer { get; private set; }
+        // [field: SerializeField] public GameObject WhitePlayer { get; private set; }
+        [field: SerializeField] public List<GameObject> players {get; private set;}
         [field: SerializeField] public ThrowableDB throwableDB { get; private set; }
         [field: SerializeField] public ConfigsDB configsDB { get; private set; }
         [field: SerializeField] public AudioDB audiosDB { get; private set; }
