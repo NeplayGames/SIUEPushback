@@ -164,16 +164,16 @@ namespace SIUE.ControllerGames
             ""id"": ""251454cb-d56b-4526-a681-725b2135b8c2"",
             ""actions"": [
                 {
-                    ""name"": ""Select"",
-                    ""type"": ""Value"",
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
                     ""id"": ""65c33c4f-ab5d-4b2e-9b6a-1ef1337af34f"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Click"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""db8dc7a1-373a-4044-bcce-58068d0743b2"",
                     ""expectedControlType"": ""Button"",
@@ -194,45 +194,12 @@ namespace SIUE.ControllerGames
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""5687b21c-c9f1-490e-a572-508929cbf1f3"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a955a4e9-a199-477f-94b7-05794158726c"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8b08c531-14c9-455e-9f7a-71820c4169c5"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c052301b-8a9a-419a-835a-7f7674a646f1"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Click"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -244,6 +211,17 @@ namespace SIUE.ControllerGames
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1706b0ec-bbb4-498e-b591-84106616d9c4"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -282,8 +260,8 @@ namespace SIUE.ControllerGames
             m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-            m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
-            m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
+            m_UI_Restart = m_UI.FindAction("Restart", throwIfNotFound: true);
+            m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
             m_UI_Quit = m_UI.FindAction("Quit", throwIfNotFound: true);
         }
 
@@ -408,15 +386,15 @@ namespace SIUE.ControllerGames
         // UI
         private readonly InputActionMap m_UI;
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-        private readonly InputAction m_UI_Select;
-        private readonly InputAction m_UI_Click;
+        private readonly InputAction m_UI_Restart;
+        private readonly InputAction m_UI_Start;
         private readonly InputAction m_UI_Quit;
         public struct UIActions
         {
             private @GameActions m_Wrapper;
             public UIActions(@GameActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Select => m_Wrapper.m_UI_Select;
-            public InputAction @Click => m_Wrapper.m_UI_Click;
+            public InputAction @Restart => m_Wrapper.m_UI_Restart;
+            public InputAction @Start => m_Wrapper.m_UI_Start;
             public InputAction @Quit => m_Wrapper.m_UI_Quit;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
@@ -427,12 +405,12 @@ namespace SIUE.ControllerGames
             {
                 if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-                @Select.started += instance.OnSelect;
-                @Select.performed += instance.OnSelect;
-                @Select.canceled += instance.OnSelect;
-                @Click.started += instance.OnClick;
-                @Click.performed += instance.OnClick;
-                @Click.canceled += instance.OnClick;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
                 @Quit.started += instance.OnQuit;
                 @Quit.performed += instance.OnQuit;
                 @Quit.canceled += instance.OnQuit;
@@ -440,12 +418,12 @@ namespace SIUE.ControllerGames
 
             private void UnregisterCallbacks(IUIActions instance)
             {
-                @Select.started -= instance.OnSelect;
-                @Select.performed -= instance.OnSelect;
-                @Select.canceled -= instance.OnSelect;
-                @Click.started -= instance.OnClick;
-                @Click.performed -= instance.OnClick;
-                @Click.canceled -= instance.OnClick;
+                @Restart.started -= instance.OnRestart;
+                @Restart.performed -= instance.OnRestart;
+                @Restart.canceled -= instance.OnRestart;
+                @Start.started -= instance.OnStart;
+                @Start.performed -= instance.OnStart;
+                @Start.canceled -= instance.OnStart;
                 @Quit.started -= instance.OnQuit;
                 @Quit.performed -= instance.OnQuit;
                 @Quit.canceled -= instance.OnQuit;
@@ -492,8 +470,8 @@ namespace SIUE.ControllerGames
         }
         public interface IUIActions
         {
-            void OnSelect(InputAction.CallbackContext context);
-            void OnClick(InputAction.CallbackContext context);
+            void OnRestart(InputAction.CallbackContext context);
+            void OnStart(InputAction.CallbackContext context);
             void OnQuit(InputAction.CallbackContext context);
         }
     }

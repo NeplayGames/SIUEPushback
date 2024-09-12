@@ -36,6 +36,7 @@ namespace SIUE.ControllerGames.UI
             if (totalPlayer > 1)
             {
                 uIInputReader.SelectPressed -= StartGame;
+                uIInputReader.RestartPressed += RestartGame;
                 StartGameAction?.Invoke();
                 this.UI.SetActive(false);
                 InGameUI.SetActive(true);
@@ -67,13 +68,12 @@ namespace SIUE.ControllerGames.UI
              PlayerWonMessageText.text = message;
             RestartUI.SetActive(true);
             InGameUI.SetActive(false);
-            uIInputReader.SelectPressed += RestartGame;
         }
 
         private void RestartGame()
         {
+            uIInputReader.RestartPressed -= RestartGame;
             SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
-            uIInputReader.SelectPressed -= RestartGame;
         }
     }
 

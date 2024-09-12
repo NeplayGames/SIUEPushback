@@ -22,7 +22,7 @@ namespace SIUE.ControllerGames.Player
         private Vector3 playerMovement;
         private InputReader inputReader;
         private PlayerConfig playerConfig;
-        public float throwDuration = 1f; // Duration of the throw in seconds
+        private float throwDuration = 1f; // Duration of the throw in seconds
         private Vector3 startPosition;
         private Vector3 targetPosition;
         private float throwTimer;

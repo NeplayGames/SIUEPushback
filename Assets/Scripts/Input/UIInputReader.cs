@@ -10,6 +10,7 @@ namespace SIUE.ControllerGames.Input
     {
         GameActions.UIActions inputAction;
         public event Action SelectPressed;
+        public event Action RestartPressed;
         public UIInputReader()
         {
             GameActions gameAction = new GameActions();
@@ -23,15 +24,16 @@ namespace SIUE.ControllerGames.Input
             inputAction.RemoveCallbacks(this);
         }
 
-        public void OnClick(InputAction.CallbackContext context)
+        public void OnStart(InputAction.CallbackContext context)
         {
             Debug.Log("Click");
             SelectPressed?.Invoke();
         }
 
-        public void OnSelect(InputAction.CallbackContext context)
+        public void OnRestart(InputAction.CallbackContext context)
         {
             Debug.Log("Click");
+            RestartPressed?.Invoke();
         }
 
         public void OnQuit(InputAction.CallbackContext context)
