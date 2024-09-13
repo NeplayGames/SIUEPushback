@@ -73,6 +73,7 @@ namespace SIUE.ControllerGames.UI
         private void RestartGame()
         {
             uIInputReader.RestartPressed -= RestartGame;
+            uIInputReader.Dispose();
             SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
         }
     }

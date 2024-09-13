@@ -97,6 +97,7 @@ namespace SIUE.ControllerGames.Player
             if (!isControllable) return;
             this.inputReader.moveAction -= MovePlayer;
             this.inputReader.shootAction -= Shoot;
+            this.inputReader.Dispose();
         }
 
         void Update()
